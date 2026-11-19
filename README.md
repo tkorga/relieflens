@@ -79,7 +79,7 @@ source .venv/bin/activate
 ### 3. Install dependencies
 
 ```bash
-python -m pip install pandas requests pytest streamlit pydeck plotly
+python -m pip install -r requirements.txt
 ```
 
 ### 4. Run the dashboard
