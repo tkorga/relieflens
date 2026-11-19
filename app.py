@@ -371,6 +371,31 @@ with displacement_tab:
         "are represented in this reporting period. "
         "Unrepresented regions should not be interpreted as having zero IDPs."
     )
+        # Identify regions without observations in the selected period
+    missing_regions = regions_df[
+        ~regions_df["id"].isin(date_df["admin1Pcode"])
+    ].sort_values("name.en")
+
+    if not missing_regions.empty:
+        st.warning(
+            f"{len(missing_regions)} regions have no observations "
+            "in this reporting period."
+        )
+
+        st.dataframe(
+            missing_regions[["id", "name.en"]].rename(
+                columns={
+                    "id": "Region code",
+                    "name.en": "Region",
+                }
+            ),
+            hide_index=True,
+            use_container_width=True,
+        )
+    else:
+        st.success(
+            "All reference regions are represented in this reporting period."
+        )
     st.subheader("Displacement Observation Records")
 
     display_columns = [
