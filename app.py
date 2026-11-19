@@ -349,6 +349,16 @@ with displacement_tab:
 
     # Detailed records
         st.subheader("Regional Reporting Coverage")
+        covered_regions = date_df["admin1Pcode"].nunique()
+    total_regions = regions_df["id"].nunique()
+    missing_count = total_regions - covered_regions
+    coverage_pct = 100 * covered_regions / total_regions
+
+    cov1, cov2, cov3 = st.columns(3)
+
+    cov1.metric("Regions represented", covered_regions)
+    cov2.metric("Regions missing", missing_count)
+    cov3.metric("Regional coverage", f"{coverage_pct:.1f}%")
 
     st.caption(
         "Number of IOM observations by destination region "
