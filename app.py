@@ -348,6 +348,29 @@ with displacement_tab:
         st.bar_chart(reason_counts)
 
     # Detailed records
+        st.subheader("Regional Reporting Coverage")
+
+    st.caption(
+        "Number of IOM observations by destination region "
+        "for the selected monitoring operation and reporting date. "
+        "This chart shows reporting coverage, not displacement severity."
+    )
+
+    region_counts = (
+        date_df.groupby("admin1Name")
+        .size()
+        .sort_values(ascending=False)
+        .rename("Observations")
+    )
+
+    st.bar_chart(region_counts, horizontal=True)
+
+    st.caption(
+        f"{date_df['admin1Pcode'].nunique()} of "
+        f"{regions_df['id'].nunique()} administrative regions "
+        "are represented in this reporting period. "
+        "Unrepresented regions should not be interpreted as having zero IDPs."
+    )
     st.subheader("Displacement Observation Records")
 
     display_columns = [
