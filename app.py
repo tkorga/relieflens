@@ -373,3 +373,71 @@ with displacement_tab:
         "Records from different dates or operations must not be "
         "combined into a single population estimate."
     )
+
+    st.divider()
+    st.subheader("Historical Displacement Trend")
+
+    st.caption(
+        "Explore reported IDP counts for one destination, "
+        "origin, displacement reason, and monitoring operation."
+    )
+
+    trend_region = st.selectbox(
+        "Trend destination region",
+        sorted(iom_df["admin1Name"].unique()),
+    )
+
+    trend_region_df = iom_df[
+        iom_df["admin1Name"] == trend_region
+    ]
+
+    trend_operation = st.selectbox(
+        "Trend monitoring operation",
+        sorted(trend_region_df["operation"].unique()),
+    )
+
+    trend_operation_df = trend_region_df[
+        trend_region_df["operation"] == trend_operation
+    ]
+
+    trend_origin = st.selectbox(
+        "Trend origin region",
+        sorted(trend_operation_df["idpOriginAdmin1Name"].unique()),
+    )
+
+    trend_origin_df = trend_operation_df[
+        trend_operation_df["idpOriginAdmin1Name"] == trend_origin
+    ]
+
+    trend_reason = st.selectbox(
+        "Trend displacement reason",
+        sorted(trend_origin_df["displacementReason"].unique()),
+    )
+
+    trend_df = trend_origin_df[
+        trend_origin_df["displacementReason"] == trend_reason
+    ].copy()
+
+    trend_df["date"] = pd.to_datetime(trend_df["reportingDate"])
+
+    trend_df = trend_df.sort_values("date")
+
+    # Verify that each date contains one observation.
+    repeated_dates = trend_df["date"].duplicated().any()
+
+    if repeated_dates:
+        st.warning(
+            "Multiple observations exist for some reporting dates. "
+            "A single population trend cannot be displayed safely."
+        )
+        st.dataframe(trend_df, hide_index=True)
+    else:
+        chart_df = trend_df.set_index("date")[["numPresentIdpInd"]]
+
+        st.line_chart(chart_df)
+
+        st.caption(
+            "Values represent reported IDPs for the selected "
+            "origin-destination-reason combination. "
+            "Dates are historical reporting periods, not live estimates."
+        )
