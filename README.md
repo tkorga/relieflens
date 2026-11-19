@@ -69,7 +69,9 @@ Reporting coverage describes the availability of observations, not the severity 
 
 **Source:** [Open Admin Data: Ethiopia Administrative Divisions](https://github.com/open-admin-data/ethiopia-administrative-divisions)
 
-**License:** CC BY 4.0
+**License:** [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
+
+**Attribution:** Original dataset credited to jakkkrapongt. Administrative data was processed and cleaned for use in ReliefLens.
 
 The administrative dataset contains:
 
