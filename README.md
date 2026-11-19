@@ -3,6 +3,9 @@
 **An Interactive Humanitarian Geographic and Displacement Data Explorer for Ethiopia**
 
 **[Live Dashboard](https://relieflens.streamlit.app/)** | **[GitHub Repository](https://github.com/tkorga/relieflens)**
+## Dashboard Preview
+
+![ReliefLens Geographic Explorer showing Ethiopia's administrative locations](assets/relieflens-dashboard.png)
 
 ReliefLens is a Python-based humanitarian data exploration dashboard that combines Ethiopian administrative geographic information with historical displacement observations from the International Organization for Migration (IOM) Displacement Tracking Matrix (DTM).
 
