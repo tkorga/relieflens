@@ -1,0 +1,14 @@
+{
+  "project": "ReliefLens",
+  "dataset": "Ethiopia Administrative Divisions",
+  "total_records": 122,
+  "total_columns": 19,
+  "flagged_records": 0,
+  "issues": {
+    "missing_id": 0,
+    "duplicate_id": 0,
+    "invalid_level": 0,
+    "invalid_coordinates": 0,
+    "invalid_parent": 0
+  }
+}
