@@ -12,6 +12,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+try:
+    import streamlit as st
+
+    if "IOM_DTM_API_KEY" in st.secrets:
+        os.environ["IOM_DTM_API_KEY"] = st.secrets["IOM_DTM_API_KEY"]
+except (FileNotFoundError, KeyError):
+    pass
+
 BASE_URL = "https://dtmapi.iom.int/v3/displacement"
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_FILE = ROOT / "data/raw/iom_dtm/ethiopia_admin1.json"

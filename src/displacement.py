@@ -26,10 +26,24 @@ OBSERVATION_KEYS = [
 
 
 def load_data():
-    """Load and validate the local IOM displacement snapshot."""
+    """Load a local IOM snapshot or retrieve observations from the API."""
 
-    with DATA_FILE.open("r", encoding="utf-8") as file:
-        snapshot = json.load(file)
+    if DATA_FILE.exists():
+        with DATA_FILE.open("r", encoding="utf-8") as file:
+            snapshot = json.load(file)
+    else:
+        from src.iom_dtm import get_ethiopia_displacement
+
+        response = get_ethiopia_displacement()
+        records = response.get("result")
+
+        if not isinstance(records, list) or not records:
+            raise ValueError("IOM API returned no displacement records.")
+
+        snapshot = {
+            "record_count": len(records),
+            "records": records,
+        }
 
     records = snapshot.get("records")
 
