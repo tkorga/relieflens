@@ -94,3 +94,57 @@ def test_missing_population():
     results = validate_data(df)
 
     assert results["invalid_population_records"] == 1
+
+def test_trend_keys_are_unique():
+    import pandas as pd
+
+    records = pd.DataFrame([
+        {
+            "operation": "Countrywide monitoring",
+            "admin1Pcode": "ET04",
+            "idpOriginAdmin1Pcode": "ET04",
+            "displacementReason": "Conflict",
+            "reportingDate": "2024-08-31",
+        },
+        {
+            "operation": "Countrywide monitoring",
+            "admin1Pcode": "ET04",
+            "idpOriginAdmin1Pcode": "ET04",
+            "displacementReason": "Natural disaster",
+            "reportingDate": "2024-08-31",
+        },
+    ])
+
+    trend_keys = [
+        "operation",
+        "admin1Pcode",
+        "idpOriginAdmin1Pcode",
+        "displacementReason",
+        "reportingDate",
+    ]
+
+    from src.displacement import validate_trend_keys
+
+    assert validate_trend_keys(records)
+def test_trend_keys_reject_duplicates():
+    import pandas as pd
+    from src.displacement import validate_trend_keys
+
+    records = pd.DataFrame([
+        {
+            "operation": "Countrywide monitoring",
+            "admin1Pcode": "ET04",
+            "idpOriginAdmin1Pcode": "ET04",
+            "displacementReason": "Conflict",
+            "reportingDate": "2024-08-31",
+        },
+        {
+            "operation": "Countrywide monitoring",
+            "admin1Pcode": "ET04",
+            "idpOriginAdmin1Pcode": "ET04",
+            "displacementReason": "Conflict",
+            "reportingDate": "2024-08-31",
+        },
+    ])
+
+    assert not validate_trend_keys(records)

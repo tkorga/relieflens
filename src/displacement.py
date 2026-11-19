@@ -203,6 +203,16 @@ def analyze_overlaps(df):
         ).to_string()
     )
 
+def validate_trend_keys(df):
+    keys = [
+        "operation",
+        "admin1Pcode",
+        "idpOriginAdmin1Pcode",
+        "displacementReason",
+        "reportingDate",
+    ]
+
+    return not df.duplicated(subset=keys).any()
 
 def main():
     parser = argparse.ArgumentParser(

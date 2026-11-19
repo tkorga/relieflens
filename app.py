@@ -423,9 +423,9 @@ with displacement_tab:
     trend_df = trend_df.sort_values("date")
 
     # Verify that each date contains one observation.
-    repeated_dates = trend_df["date"].duplicated().any()
+    from src.displacement import validate_trend_keys
 
-    if repeated_dates:
+    if not validate_trend_keys(trend_df):
         st.warning(
             "Multiple observations exist for some reporting dates. "
             "A single population trend cannot be displayed safely."
