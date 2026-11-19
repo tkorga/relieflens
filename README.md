@@ -259,3 +259,11 @@ Administrative reference data provided by Open Admin Data.
 Historical displacement observations provided through the International Organization for Migration's Displacement Tracking Matrix API.
 
 Geographic basemap attribution is displayed within the application.
+
+## License
+
+ReliefLens's original application code is licensed under the [MIT License](LICENSE).
+
+Third-party datasets retain their respective licenses and usage restrictions. Ethiopian administrative data is attributed to Open Admin Data under CC BY 4.0. IOM DTM displacement data remains subject to IOM's applicable terms and permissions.
+
+The MIT License does not grant additional rights to third-party data.
