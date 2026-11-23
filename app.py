@@ -27,16 +27,30 @@ def load_data():
 df = load_data()
 
 st.title("🌍 ReliefLens")
-st.caption("Ethiopia | Humanitarian Geographic Data Explorer")
 
-st.caption(
-    "Displacement data source: International Organization for Migration (IOM). "
-    "Accessed on November 19, 2026. DTM API. Displacement Tracking Matrix."
+st.caption("ETHIOPIA | HUMANITARIAN DATA EXPLORER")
+
+st.write(
+    "Explore Ethiopia's administrative geography and historical "
+    "displacement reporting through interactive maps, charts, "
+    "and data quality insights."
 )
 
-st.markdown(
-    "[IOM DTM API Data Source](https://dtm.iom.int/data-and-analysis/dtm-api)"
-)
+with st.expander("ℹ️ Data Sources & Attribution"):
+    st.markdown(
+        "**Displacement data:** International Organization for Migration (IOM). "
+        "Accessed on November 19, 2026. DTM API. Displacement Tracking Matrix."
+    )
+
+    st.markdown(
+        "[View official IOM DTM API source]"
+        "(https://dtm.iom.int/data-and-analysis/dtm-api)"
+    )
+
+    st.caption(
+        "ReliefLens is an independent educational project and is not "
+        "affiliated with or endorsed by IOM."
+    )
 
 geography_tab, displacement_tab = st.tabs(
     ["🌍 Geographic Explorer", "📊 Displacement Analysis"]
@@ -152,7 +166,9 @@ with geography_tab:
             "style": {"color": "white"},
         },
     )
-
+    st.markdown(
+        "🔵 **Regions** &nbsp;&nbsp;&nbsp; 🟠 **Zones**"
+    )
     st.pydeck_chart(deck, use_container_width=True)
 
     st.subheader("Location Records")
@@ -320,6 +336,7 @@ with displacement_tab:
     selected_date = st.selectbox(
         "Reporting date",
         available_dates,
+        format_func=lambda date: pd.to_datetime(date).strftime("%B %d, %Y"),
     )
 
     date_df = operation_df[
@@ -328,10 +345,18 @@ with displacement_tab:
 
     region_options = sorted(date_df["admin1Name"].unique())
 
+    all_regions = st.checkbox(
+    "Include all destination regions",
+    value=True,
+)
+
+if all_regions:
+    selected_regions = region_options
+else:
     selected_regions = st.multiselect(
         "Destination regions",
         region_options,
-        default=region_options,
+        placeholder="Choose one or more regions",
     )
 
     filtered_iom = date_df[
@@ -359,9 +384,10 @@ with displacement_tab:
 
         st.bar_chart(reason_counts)
 
-    # Detailed records
-        st.subheader("Regional Reporting Coverage")
-        covered_regions = date_df["admin1Pcode"].nunique()
+    # Regional reporting coverage
+    st.subheader("Regional Reporting Coverage")
+
+    covered_regions = date_df["admin1Pcode"].nunique()
     total_regions = regions_df["id"].nunique()
     missing_count = total_regions - covered_regions
     coverage_pct = 100 * covered_regions / total_regions
