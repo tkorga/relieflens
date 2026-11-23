@@ -13,7 +13,7 @@ Built using Streamlit, Pandas, and PyDeck, ReliefLens allows users to explore ad
 
 The project focuses on making complex humanitarian datasets easier to explore while clearly communicating their limitations.
 
-**Project status:** Deployed research prototype with interactive geographic exploration, historical displacement analysis, regional reporting coverage, and automated data validation.
+**Project status:** Publicly deployed humanitarian data exploration dashboard featuring interactive geographic visualization, historical displacement analysis, regional reporting coverage, and automated data validation.
 
 **Data coverage:** 122 administrative reference locations and 1,206 historical IOM displacement observations spanning 2017–2024.
 
@@ -154,8 +154,6 @@ git clone https://github.com/tkorga/relieflens.git
 cd relieflens
 ```
 
-*Note: Access to the repository is required while it remains private.*
-
 ### 2. Create a virtual environment
 
 ```bash
@@ -210,6 +208,8 @@ python -m src.inspect_data
 ```text
 relieflens/
 ├── app.py
+├── assets/
+│   └── relieflens-dashboard.png
 ├── data/
 │   ├── raw/
 │   │   ├── ethiopia_admin.csv
@@ -230,7 +230,9 @@ relieflens/
 │   └── test_validation.py
 ├── .gitignore
 ├── requirements.txt
+├── LICENSE
 └── README.md
+
 ```
 
 **Note:** `data/raw/iom_dtm/ethiopia_admin1.json` is a locally generated snapshot and is not committed to GitHub.
