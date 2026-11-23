@@ -28,6 +28,16 @@ df = load_data()
 
 st.title("🌍 ReliefLens")
 st.caption("Ethiopia | Humanitarian Geographic Data Explorer")
+
+st.caption(
+    "Displacement data source: International Organization for Migration (IOM). "
+    "Accessed on November 19, 2026. DTM API. Displacement Tracking Matrix."
+)
+
+st.markdown(
+    "[IOM DTM API Data Source](https://dtm.iom.int/data-and-analysis/dtm-api)"
+)
+
 geography_tab, displacement_tab = st.tabs(
     ["🌍 Geographic Explorer", "📊 Displacement Analysis"]
 )

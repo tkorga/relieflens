@@ -91,6 +91,14 @@ Administrative locations should not be interpreted as evidence of current humani
 
 ### 2. IOM Displacement Tracking Matrix (DTM)
 
+Data Citation
+
+International Organization for Migration (IOM). Accessed on November 19, 2026. DTM API. Displacement Tracking Matrix.
+
+Source: https://dtm.iom.int/data-and-analysis/dtm-api
+
+The displacement data is provided by IOM. ReliefLens is an independent educational project and is not affiliated with or endorsed by IOM.
+
 **Source:** International Organization for Migration (IOM), Displacement Tracking Matrix API v3.
 
 ReliefLens integrates historical displacement observations for Ethiopia.
