@@ -42,12 +42,14 @@ geography_tab, displacement_tab = st.tabs(
     ["🌍 Geographic Explorer", "📊 Displacement Analysis"]
 )
 
-st.info(
-    "This prototype displays administrative reference locations, "
-    "not disaster incidents, humanitarian needs, or severity estimates."
-)
-
 with geography_tab:  
+    with geography_tab:
+        st.caption(
+        "Map markers represent administrative reference locations, "
+        "not individual displacement sites or incident locations."
+    )
+
+    # Sidebar filters
     # Sidebar filters
     st.sidebar.header("Explore Ethiopia")
 
